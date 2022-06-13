@@ -1,1 +1,20 @@
-<p>header works!</p>
+<header class="header">
+  <div class="wide">
+    <h3 class="logo">Admin</h3>
+    <nav class="navBar">
+      <ul class="navBarList">
+        <li class="navBarItem">
+          <a routerLink="/users" routerLinkActive="active">Users</a>
+        </li>
+        <li class="navBarItem">
+          <a routerLink="/login" routerLinkActive="active" *ngIf="!isLogin"
+            >Login</a
+          >
+        </li>
+        <li class="navBarItem">
+          <a routerLink="#" *ngIf="isLogin" (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

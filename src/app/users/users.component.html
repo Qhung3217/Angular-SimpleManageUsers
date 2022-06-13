@@ -1,1 +1,71 @@
-<p>users works!</p>
+<section class="sectionUsers">
+  <div class="sectionHeader">
+    <div class="leftTools">
+      <div class="dataTableLength">
+        <label>
+          Show
+          <select name="tableLength">
+            <option value="1">1</option>
+          </select>
+          entries
+        </label>
+      </div>
+      <div class="reloadBox">
+        Tải lại
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <title>Reload</title>
+            <path
+              d="M400 148l-21.12-24.57A191.43 191.43 0 00240 64C134 64 48 150 48 256s86 192 192 192a192.09 192.09 0 00181.07-128"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-miterlimit="10"
+              stroke-width="32"
+            />
+            <path
+              d="M464 97.42V208a16 16 0 01-16 16H337.42c-14.26 0-21.4-17.23-11.32-27.31L436.69 86.1C446.77 76 464 83.16 464 97.42z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div class="createUser">
+        <a routerLink="add">New User <span>+</span></a>
+      </div>
+    </div>
+    <div class="searchBox">
+      <input type="text" class="searchInput" placeholder="Search ..." />
+      <div class="searchIcon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="ionicon"
+          viewBox="0 0 512 512"
+        >
+          <title>Search</title>
+          <path
+            d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="32"
+          />
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="32"
+            d="M338.29 338.29L448 448"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="sectionContainer">
+    <app-list></app-list>
+  </div>
+</section>

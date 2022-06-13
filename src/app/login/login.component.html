@@ -1,1 +1,47 @@
-<p>login works!</p>
+<section class="sectionLogin">
+  <app-alert
+    [title]="hasError"
+    [message]="errorMessage"
+    *ngIf="hasError !== null"
+  ></app-alert>
+  <h1 class="title">Login</h1>
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        name="email"
+        id="email"
+        ngModel
+        required
+        email
+        #email="ngModel"
+      />
+      <span class="help-block" *ngIf="email.value === '' && email.touched"
+        >Please enter your email !</span
+      >
+      <span
+        class="help-block"
+        *ngIf="!email.valid && email.touched && email.value !== ''"
+        >Please enter a valid email !</span
+      >
+    </div>
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        required
+        ngModel
+        #pass="ngModel"
+      />
+      <span class="help-block" *ngIf="!pass.valid && pass.touched"
+        >Please enter your password !</span
+      >
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!f.valid">
+      Login
+    </button>
+  </form>
+</section>
