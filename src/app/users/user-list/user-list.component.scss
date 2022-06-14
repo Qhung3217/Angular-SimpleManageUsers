@@ -1,0 +1,201 @@
+table {
+  width: 100%;
+  border-collapse: separate;
+  border: 1px solid #f4f4f4;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.06);
+  thead th {
+    border-bottom: 3px solid #f9f9f9;
+    cursor: pointer;
+    font-size: 1.4rem;
+    width: 20%;
+    text-align: left;
+    padding: 1.2rem 2.4rem;
+    .thText {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 2.4rem;
+        height: 2.4rem;
+        svg {
+          width: 100%;
+          height: 100%;
+          max-width: 1.6rem;
+          max-height: 1.6rem;
+        }
+      }
+    }
+  }
+  th,
+  td {
+    border-right: 1px solid #f4f4f4;
+  }
+  td:last-child,
+  th:last-child {
+    border-right: none;
+  }
+
+  tbody td {
+    padding: 0.8rem;
+    font-size: 1.4rem;
+    color: #333;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+    border-color: currentColor;
+  }
+  .actionBox {
+    text-align: center;
+    a {
+      letter-spacing: -0.2px;
+      padding: 0.5rem 1rem;
+      font-size: 1.4rem;
+    }
+    a + a {
+      margin-left: 1rem;
+    }
+  }
+}
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 5rem;
+  color: #333;
+  .searchBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    span {
+      font-size: 1.6rem;
+      margin-right: 0.5rem;
+    }
+    .searchInput {
+      padding: 0.5rem 1.2rem;
+      border: 1px solid #3a5ba0;
+      border-radius: 3px;
+      color: #333;
+      font-size: 1.4rem;
+      line-height: 1;
+      flex: 1;
+      &:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+      }
+    }
+    // .searchIcon {
+    //   width: 2.4rem;
+    //   height: 2.4rem;
+    //   flex-shrink: 0;
+    //   margin-left: 0.8rem;
+    //   svg {
+    //     width: 100%;
+    //     height: 100%;
+    //     cursor: pointer;
+    //   }
+    // }
+  }
+  .leftTools {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9rem;
+    .dataTableLength {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6rem;
+      select {
+        margin: 0 0.5rem;
+      }
+    }
+    .reloadBox {
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        margin-left: 0.5rem;
+        display: block;
+        width: 1.7rem;
+        height: 1.7rem;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .createUser {
+      a {
+        padding: 0.2rem 0.8rem;
+        text-decoration: none;
+        color: #333;
+        font-size: 1.6rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1;
+        span {
+          font-size: 2.4rem;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+  .filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.6rem;
+      margin-right: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.5rem;
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+.sectionContainer {
+  margin-top: 3rem;
+  .tableBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .tableInfor {
+      font-size: 1.4rem;
+    }
+    .paginateBox {
+      margin-top: 1rem;
+      .paginate {
+        font-size: 1.8rem;
+        & ::ng-deep .ngx-pagination {
+          border: 1px solid #f9f9f9;
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+@import "../../../scss/variable";
+.formWrap {
+  text-align: center;
+  hr {
+    margin-top: 1rem;
+    width: 100%;
+    color: $primaryColor;
+  }
+  .label {
+    font-size: 1.6rem;
+    color: $textColor;
+    margin-bottom: 1rem;
+    text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .icon {
+      width: 3rem;
+      height: 3rem;
+      display: block;
+      cursor: pointer;
+      margin-left: 1rem;
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .socialLinks {
+    width: 100%;
+    margin-top: 1rem;
+    .socialLink {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 0.5rem;
+      padding: 1.2rem;
+      border: 1px solid $primaryColor;
+      border-radius: 5px;
+      .socialArea {
+        flex-shrink: 0;
+        .formControl {
+          padding: 0.7rem 1rem;
+        }
+      }
+      .linkArea {
+        width: 100%;
+      }
+      .deleteSocialLink {
+        position: absolute;
+        top: 0;
+        right: 0;
+        button {
+          margin-top: 0;
+          width: fit-content;
+          padding: 0.5rem 1rem;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}

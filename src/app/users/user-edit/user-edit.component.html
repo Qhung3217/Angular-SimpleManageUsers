@@ -1,0 +1,171 @@
+<div class="formWrap">
+  <div class="formHeading">
+    <a (click)="onNavigate()" class="formBack"
+      ><span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="ionicon"
+          viewBox="0 0 512 512"
+        >
+          <title>Return Up Back</title>
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+            d="M112 160l-64 64 64 64"
+          />
+          <path
+            d="M64 224h294c58.76 0 106 49.33 106 108v20"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="32"
+          /></svg></span
+      >Back to Users</a
+    >
+    <h1 class="formTitle">Create a new user</h1>
+  </div>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="formGroup">
+      <label for="firstName">First Name</label>
+      <input
+        type="text"
+        id="firstName"
+        class="formControl"
+        formControlName="firstName"
+      />
+    </div>
+    <div class="formGroup">
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        id="lastName"
+        class="formControl"
+        formControlName="lastName"
+      />
+    </div>
+    <div class="formGroup">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        id="email"
+        class="formControl"
+        formControlName="email"
+      />
+    </div>
+    <div class="formGroup">
+      <label for="phone">Phone</label>
+      <input
+        type="text"
+        id="phone"
+        class="formControl"
+        formControlName="phone"
+      />
+    </div>
+
+    <div class="formGroup">
+      <label for="DOB">Date of Birth</label>
+      <input type="date" id="DOB" class="formControl" formControlName="DOB" />
+    </div>
+
+    <div class="formGroup flexRadioGroup">
+      <label class="radioGroup">
+        <span>Activated</span>
+        <input
+          type="radio"
+          class="formControl"
+          formControlName="status"
+          [value]="true"
+        />
+      </label>
+      <label class="radioGroup">
+        <span>Suspended</span>
+        <input
+          type="radio"
+          class="formControl"
+          formControlName="status"
+          [value]="false"
+        />
+      </label>
+    </div>
+
+    <div class="socialLinks" formArrayName="socialLinks">
+      <div class="label">
+        Social Links<span class="icon" (click)="onAddSocialLink()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <title>Add Circle</title>
+            <path
+              d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
+              fill="none"
+              stroke="currentColor"
+              stroke-miterlimit="10"
+              stroke-width="32"
+            />
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="32"
+              d="M256 176v160M336 256H176"
+            />
+          </svg>
+        </span>
+      </div>
+      <div
+        class="socialLink"
+        *ngFor="let ingredient of getControls('socialLinks'); let i = index"
+        [formGroupName]="i"
+      >
+        <div class="socialArea">
+          <div class="formGroup">
+            <label>Social</label>
+            <select name="social" formControlName="social" class="formControl">
+              <option value="facebook">Facebook</option>
+              <option value="linked">Linked</option>
+              <option value="twitter">Twitter</option>
+            </select>
+          </div>
+        </div>
+        <div class="linkArea">
+          <div class="formGroup">
+            <label for="link">Link</label>
+            <input
+              id="link"
+              type="text"
+              class="formControl"
+              formControlName="address"
+            />
+          </div>
+        </div>
+        <div class="deleteSocialLink">
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="onDeletingSocialLink(i)"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr />
+
+    <div class="formBottom">
+      <button type="button" class="btn btn-danger" (click)="onNavigate()">
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!userForm.valid"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,315 @@
+<div class="sectionHeader">
+  <div class="leftTools">
+    <div class="dataTableLength">
+      <label>
+        Show
+        <select
+          name="tableLength"
+          [(ngModel)]="recordsPerPage"
+          (change)="onChangeRecordsPerPage()"
+        >
+          <option [value]="choice" *ngFor="let choice of paginateChoices">
+            {{ choice }}
+          </option>
+        </select>
+        entries
+      </label>
+    </div>
+    <div class="reloadBox" (click)="onReload()">
+      Reload
+      <span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="ionicon"
+          viewBox="0 0 512 512"
+        >
+          <title>Reload</title>
+          <path
+            d="M400 148l-21.12-24.57A191.43 191.43 0 00240 64C134 64 48 150 48 256s86 192 192 192a192.09 192.09 0 00181.07-128"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="32"
+          />
+          <path
+            d="M464 97.42V208a16 16 0 01-16 16H337.42c-14.26 0-21.4-17.23-11.32-27.31L436.69 86.1C446.77 76 464 83.16 464 97.42z"
+          />
+        </svg>
+      </span>
+    </div>
+    <div class="createUser">
+      <a routerLink="new">New User <span>+</span></a>
+    </div>
+    <div class="filter">
+      <p>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <title>Filter</title>
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="32"
+              d="M32 144h448M112 256h288M208 368h96"
+            />
+          </svg>
+        </span>
+        Status:
+      </p>
+      <select name="filerSelect" [(ngModel)]="filter" (change)="onFilter()">
+        <option value="all">All</option>
+        <option value="activated">Activated</option>
+        <option value="suspended">Suspended</option>
+      </select>
+    </div>
+  </div>
+  <div class="searchBox">
+    <span>Search:</span>
+    <input
+      type="text"
+      class="searchInput"
+      placeholder="Search ..."
+      name="searchInput"
+      [(ngModel)]="searchInput"
+    />
+  </div>
+</div>
+<div class="sectionContainer">
+  <table>
+    <thead>
+      <tr>
+        <th (click)="onSort('status')">
+          <span class="thText">
+            Status
+            <span class="icon">
+              <svg
+                *ngIf="initialLoad || isRevert"
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Up</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 328l144-144 144 144"
+                />
+              </svg>
+              <svg
+                *ngIf="initialLoad || !isRevert"
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Down</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 184l144 144 144-144"
+                />
+              </svg>
+            </span>
+          </span>
+        </th>
+        <th (click)="onSort('firstName')">
+          <span class="thText">
+            Full Name
+            <span class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Up</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 328l144-144 144 144"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Down</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 184l144 144 144-144"
+                />
+              </svg>
+            </span>
+          </span>
+        </th>
+        <th (click)="onSort('email')">
+          <span class="thText">
+            Email
+            <span class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Up</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 328l144-144 144 144"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Down</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 184l144 144 144-144"
+                />
+              </svg>
+            </span>
+          </span>
+        </th>
+        <th (click)="onSort('phone')">
+          <span class="thText">
+            Phone
+            <span class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Up</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 328l144-144 144 144"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Down</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 184l144 144 144-144"
+                />
+              </svg>
+            </span>
+          </span>
+        </th>
+        <th (click)="onSort('DOB')">
+          <span class="thText">
+            Date of birth
+            <span class="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Up</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 328l144-144 144 144"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Down</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 184l144 144 144-144"
+                />
+              </svg>
+            </span>
+          </span>
+        </th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let user of users
+            | filter: searchInput:['firstName', 'lastName']
+            | filterStatus: filter
+            | orderBy: key:isRevert
+            | paginate
+              : { itemsPerPage: recordsPerPage, currentPage: pageNumber }
+        "
+      >
+        <td>{{ user.status ? "Activated" : "Suspended" }}</td>
+        <td>{{ user.firstName + " " + user.lastName }}</td>
+        <td>{{ user.email | hideEmail }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.DOB | date: mediumDate }}</td>
+        <td>
+          <div class="actionBox">
+            <a [routerLink]="[user.id, 'edit']" class="btn btn-success">Edit</a>
+            <a [routerLink]="user.id" class="btn btn-danger">Delete</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="tableBottom">
+    <div class="tableInfor">
+      Showing 1 to {{ recordsPerPage }} of {{ users.length }} entries
+    </div>
+    <div class="paginateBox">
+      <pagination-controls
+        class="paginate"
+        (pageChange)="pageNumber = $event"
+        directionLinks="false"
+        (pageBoundsCorrection)="pageNumber = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+</div>

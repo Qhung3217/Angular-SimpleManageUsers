@@ -12,7 +12,13 @@
           >
         </li>
         <li class="navBarItem">
-          <a routerLink="#" *ngIf="isLogin" (click)="onLogout()">Logout</a>
+          <a
+            routerLink="#"
+            *ngIf="isLogin"
+            (click)="onLogout()"
+            [ngStyle]="{ color: 'red' }"
+            >Logout</a
+          >
         </li>
       </ul>
     </nav>

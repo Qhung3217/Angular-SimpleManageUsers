@@ -6,7 +6,7 @@
   ></app-alert>
   <h1 class="title">Login</h1>
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <div class="form-control">
+    <div class="formControl">
       <label for="email">Email</label>
       <input
         type="text"
@@ -17,16 +17,16 @@
         email
         #email="ngModel"
       />
-      <span class="help-block" *ngIf="email.value === '' && email.touched"
+      <span class="helpBlock" *ngIf="email.value === '' && email.touched"
         >Please enter your email !</span
       >
       <span
-        class="help-block"
+        class="helpBlock"
         *ngIf="!email.valid && email.touched && email.value !== ''"
         >Please enter a valid email !</span
       >
     </div>
-    <div class="form-control">
+    <div class="formControl">
       <label for="password">Password</label>
       <input
         type="password"
@@ -36,7 +36,7 @@
         ngModel
         #pass="ngModel"
       />
-      <span class="help-block" *ngIf="!pass.valid && pass.touched"
+      <span class="helpBlock" *ngIf="!pass.valid && pass.touched"
         >Please enter your password !</span
       >
     </div>
