@@ -3,13 +3,17 @@ import * as RegEx from '../../shared/regex';
 export function SocialLinkValidator(
   control: FormControl
 ): { [s: string]: boolean } | null {
-  if (!control.value) return null;
+  console.log("'", control.value, control['socialLinks'], "'");
+  if (!control['socialLinks']?.length && !control.value) return null;
   const value: string = control.value;
-  console.log(
-    RegEx.facebook.test(value),
-    RegEx.twitter.test(value),
-    RegEx.linkedin.test(value)
-  );
+  if (typeof value === 'object') return null; //if control has value, typeof control = string. Otherwise is object
+  // console.log(
+  //   RegEx.facebook.test(value),
+  //   RegEx.twitter.test(value),
+  //   RegEx.linkedin.test(value),
+  //   value,
+  //   typeof value
+  // );
   if (RegEx.facebook.test(value)) {
     console.log('fb');
     return null;

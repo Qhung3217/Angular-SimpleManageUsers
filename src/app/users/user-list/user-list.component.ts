@@ -10,7 +10,6 @@ import { User } from '../user.model';
 })
 export class UserListComponent implements OnInit, OnDestroy {
   users: User[];
-  usersResponse: User[];
   userSub: Subscription;
   searchInput;
   key: string;
@@ -20,15 +19,20 @@ export class UserListComponent implements OnInit, OnDestroy {
   pageNumber = 1;
   initialLoad = true;
   filter = 'all';
-  totalUserAfterPipe = 0;
+  filterMetadata = {
+    count: 0,
+  };
+  hasError = null;
+  errorMessage = null;
+  isLoading = false;
+
   constructor(private usersService: UsersService) {}
 
   ngOnInit(): void {
-    this.usersResponse = this.usersService.getUsers();
-    this.users = this.usersResponse.slice();
+    this.users = this.usersService.getUsers();
     this.userSub = this.usersService.usersChanged.subscribe((users) => {
+      console.log('change');
       this.users = users;
-      this.users = this.usersResponse.slice();
     });
   }
   ngOnDestroy(): void {
@@ -41,7 +45,10 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   onReload() {
     // console.log('reaload');
-    this.usersService.fetchUsers().subscribe();
+    this.isLoading = true;
+    this.usersService.fetchUsers().subscribe(() => {
+      this.isLoading = false;
+    });
   }
   onSort(key: string) {
     this.key = key;
@@ -50,5 +57,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
   onFilter() {
     console.log(this.filter);
+  }
+  onDelete(id: number) {
+    this.isLoading = true;
+    this.usersService.deleteUser(id).subscribe({
+      next: (resData) => {
+        this.isLoading = false;
+      },
+      error: (errMess) => {
+        this.isLoading = false;
+        this.hasError = 'Error !!';
+        this.errorMessage = errMess;
+      },
+    });
   }
 }

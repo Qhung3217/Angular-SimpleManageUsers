@@ -1,4 +1,10 @@
 <div class="sectionHeader">
+  <app-alert
+    [title]="hasError"
+    [message]="errorMessage"
+    *ngIf="hasError !== null"
+  ></app-alert>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <div class="leftTools">
     <div class="dataTableLength">
       <label>
@@ -274,15 +280,20 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody #listItemCurrent>
       <tr
         *ngFor="
           let user of users
             | filter: searchInput:['firstName', 'lastName']
             | filterStatus: filter
+            | count: filterMetadata
             | orderBy: key:isRevert
             | paginate
-              : { itemsPerPage: recordsPerPage, currentPage: pageNumber }
+              : {
+                  itemsPerPage: recordsPerPage,
+                  currentPage: pageNumber
+                };
+          let i = index
         "
       >
         <td>{{ user.status ? "Activated" : "Suspended" }}</td>
@@ -293,7 +304,7 @@
         <td>
           <div class="actionBox">
             <a [routerLink]="[user.id, 'edit']" class="btn btn-success">Edit</a>
-            <a [routerLink]="user.id" class="btn btn-danger">Delete</a>
+            <a (click)="onDelete(user.id)" class="btn btn-danger">Delete</a>
           </div>
         </td>
       </tr>
@@ -301,7 +312,7 @@
   </table>
   <div class="tableBottom">
     <div class="tableInfor">
-      Showing 1 to {{ recordsPerPage }} of {{ users.length }} entries
+      Showing 1 to {{ recordsPerPage }} of {{ filterMetadata.count }} entries
     </div>
     <div class="paginateBox">
       <pagination-controls

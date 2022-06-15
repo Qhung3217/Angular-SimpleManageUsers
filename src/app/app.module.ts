@@ -18,6 +18,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import { FilterStatusPipe } from './shared/filter-status.pipe';
 import { FilterPipe } from './shared/filter.pipe';
+import { CountPipe } from './shared/count.pipe';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { FilterPipe } from './shared/filter.pipe';
     HideEmailPipe,
     FilterStatusPipe,
     FilterPipe,
+    CountPipe,
+    LoadingSpinnerComponent,
   ],
   imports: [
     FormsModule,

@@ -1,4 +1,9 @@
 <div class="formWrap">
+  <app-alert
+    [title]="hasError"
+    [message]="errorMessage"
+    *ngIf="hasError !== null"
+  ></app-alert>
   <div class="formHeading">
     <a (click)="onNavigate()" class="formBack"
       ><span>
@@ -210,8 +215,10 @@
         class="btn btn-success"
         [disabled]="!userForm.valid"
       >
-        Create
+        {{ editMode ? "Update" : "Create" }}
       </button>
     </div>
   </form>
+
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 </div>

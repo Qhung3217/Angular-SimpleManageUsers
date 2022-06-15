@@ -7,6 +7,6 @@ export class User {
     public phone: string,
     public DOB: Date,
     public status: boolean,
-    public socialLinks: [{ social: string; address: string }]
+    public socialLinks: []
   ) {}
 }

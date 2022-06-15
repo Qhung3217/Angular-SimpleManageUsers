@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { UsersService } from './../users.service';
 
 import { User } from './../user.model';
@@ -16,6 +17,9 @@ export class UserEditComponent implements OnInit {
   user: User;
   editMode: boolean = false;
   userForm: FormGroup;
+  hasError: string = null;
+  errorMessage = null;
+  isLoading: boolean = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -53,12 +57,7 @@ export class UserEditComponent implements OnInit {
       if (this.user.socialLinks) {
         for (let link of this.user.socialLinks) {
           userSocialLinks.push(
-            new FormGroup({
-              address: new FormControl(link.address, [
-                Validators.required,
-                SocialLinkValidator,
-              ]),
-            })
+            new FormControl(link, [Validators.required, SocialLinkValidator])
           );
         }
       }
@@ -79,6 +78,15 @@ export class UserEditComponent implements OnInit {
       },
       { validators: SocialLinkValidator }
     );
+
+    // const invalid = [];
+    // const controls = this.userForm.controls;
+    // for (const name in controls) {
+    //   if (controls[name].invalid) {
+    //     invalid.push(name);
+    //   }
+    // }
+    // console.log(invalid);
   }
 
   onAddSocialLink() {
@@ -92,9 +100,27 @@ export class UserEditComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.userForm);
+    // let userObs: Observable<User>;
+    // this.isLoading = true;
+    // if (this.editMode)
+    //   userObs = this.usersService.updateUser(this.id, this.userForm.value);
+    // else userObs = this.usersService.createUser(this.userForm.value);
+    // userObs.subscribe({
+    //   next: (resData) => {
+    //     console.log('resData', resData);
+    //     this.isLoading = false;
+    //     this.router.navigate(['/users']);
+    //   },
+    //   error: (errMess) => {
+    //     console.log('errData', errMess);
+    //     this.isLoading = false;
+    //     this.errorMessage = errMess;
+    //     this.hasError = 'Error !!';
+    //   },
+    // });
   }
   onNavigate() {
-    this.router.navigate(['../'], { relativeTo: this.route });
+    this.router.navigate(['/users'], { relativeTo: this.route });
   }
   onDeletingSocialLink(index: number) {
     (<FormArray>this.userForm.get('socialLinks')).removeAt(index);
