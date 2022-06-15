@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -11,7 +11,7 @@ export class LoginService {
   localStorageChanged = new Subject<boolean>();
   expirationTimer;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   authenticate(email: string, password: string): boolean {
     if (
@@ -24,7 +24,13 @@ export class LoginService {
       localStorage.setItem('credential', JSON.stringify(auth));
       this.autoLogout(3600000); //1 hour
       this.localStorageChanged.next(true);
-      this.router.navigate(['/users']);
+      let nextUrl = null;
+      this.route.queryParamMap.subscribe(
+        (params) => (nextUrl = params.get('redirectUrl'))
+      );
+
+      if (nextUrl) this.router.navigate([nextUrl]);
+      else this.router.navigate(['/users']);
       return true;
     }
     return false;

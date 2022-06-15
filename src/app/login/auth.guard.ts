@@ -19,6 +19,9 @@ export class AuthGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     if (localStorage.getItem('credential')) return true;
-    return this.router.createUrlTree(['/login']);
+    // console.log(state.url);
+    return this.router.createUrlTree(['/login'], {
+      queryParams: { redirectUrl: state.url },
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoginService } from './login.service';
@@ -10,9 +11,18 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
   hasError: string = null;
   errorMessage: string;
-  constructor(private loginService: LoginService) {}
+  nextURL: string = null;
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.nextURL = params['redirectUrl'];
+    });
+  }
 
   onSubmit(loginForm: NgForm) {
     const email = loginForm.value.email;
@@ -20,6 +30,8 @@ export class LoginComponent implements OnInit {
     if (!this.loginService.authenticate(email, password)) {
       this.hasError = 'Error !!';
       this.errorMessage = 'Email or password is incorrect';
+    } else {
+      // console.log(this.nextURL);
     }
   }
 }

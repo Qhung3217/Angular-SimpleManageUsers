@@ -116,21 +116,12 @@
           </svg>
         </span>
       </div>
+      <aside>Accept only Facebook, Twitter and LinkedIn</aside>
       <div
         class="socialLink"
         *ngFor="let ingredient of getControls('socialLinks'); let i = index"
         [formGroupName]="i"
       >
-        <div class="socialArea">
-          <div class="formGroup">
-            <label>Social</label>
-            <select name="social" formControlName="social" class="formControl">
-              <option value="facebook">Facebook</option>
-              <option value="linked">Linked</option>
-              <option value="twitter">Twitter</option>
-            </select>
-          </div>
-        </div>
         <div class="linkArea">
           <div class="formGroup">
             <label for="link">Link</label>
@@ -140,6 +131,12 @@
               class="formControl"
               formControlName="address"
             />
+          </div>
+          <div
+            *ngIf="userForm.errors?.['socialLinksValid'] && (heroForm.touched || heroForm.dirty)"
+            class="cross-validation-error-message alert alert-danger"
+          >
+            Social link invalid !
           </div>
         </div>
         <div class="deleteSocialLink">

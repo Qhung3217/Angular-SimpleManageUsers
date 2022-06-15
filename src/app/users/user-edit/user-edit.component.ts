@@ -4,6 +4,7 @@ import { User } from './../user.model';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SocialLinkValidator } from './socialLinkValidator';
 
 @Component({
   selector: 'app-user-edit',
@@ -53,7 +54,6 @@ export class UserEditComponent implements OnInit {
         for (let link of this.user.socialLinks) {
           userSocialLinks.push(
             new FormGroup({
-              social: new FormControl(link.social),
               address: new FormControl(link.address),
             })
           );
@@ -61,21 +61,26 @@ export class UserEditComponent implements OnInit {
       }
     }
 
-    this.userForm = new FormGroup({
-      firstName: new FormControl(userFirstName, Validators.required),
-      lastName: new FormControl(userLastName, Validators.required),
-      email: new FormControl(userEmail, Validators.required),
-      phone: new FormControl(userPhone, Validators.required),
-      DOB: new FormControl(userDOB),
-      status: new FormControl(userStatus, Validators.required),
-      socialLinks: userSocialLinks,
-    });
+    this.userForm = new FormGroup(
+      {
+        firstName: new FormControl(userFirstName, Validators.required),
+        lastName: new FormControl(userLastName, Validators.required),
+        email: new FormControl(userEmail, [
+          Validators.required,
+          Validators.email,
+        ]),
+        phone: new FormControl(userPhone, Validators.required),
+        DOB: new FormControl(userDOB),
+        status: new FormControl(userStatus, Validators.required),
+        socialLinks: userSocialLinks,
+      },
+      { validators: SocialLinkValidator }
+    );
   }
 
   onAddSocialLink() {
     (<FormArray>this.userForm.get('socialLinks')).push(
       new FormGroup({
-        social: new FormControl('facebook'),
         address: new FormControl(null),
       })
     );
