@@ -30,10 +30,19 @@ export class UsersService {
     );
   }
   deleteUser(id: number) {
-    return this.http.delete(environment.urlApi + 'users/' + id).pipe(
+    return this.http.delete<User>(environment.urlApi + 'users/' + id).pipe(
       catchError(this.handleError),
       tap(() => this.fetchUsers().subscribe())
     );
+  }
+  changeUserStatus(user: User) {
+    user.status = !user.status;
+    return this.http
+      .put<User>(environment.urlApi + 'users/' + user.id, user)
+      .pipe(
+        catchError(this.handleError),
+        tap(() => this.fetchUsers().subscribe())
+      );
   }
   getUsers() {
     return this.users.slice();

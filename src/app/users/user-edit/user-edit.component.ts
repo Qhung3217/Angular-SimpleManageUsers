@@ -100,24 +100,24 @@ export class UserEditComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.userForm);
-    // let userObs: Observable<User>;
-    // this.isLoading = true;
-    // if (this.editMode)
-    //   userObs = this.usersService.updateUser(this.id, this.userForm.value);
-    // else userObs = this.usersService.createUser(this.userForm.value);
-    // userObs.subscribe({
-    //   next: (resData) => {
-    //     console.log('resData', resData);
-    //     this.isLoading = false;
-    //     this.router.navigate(['/users']);
-    //   },
-    //   error: (errMess) => {
-    //     console.log('errData', errMess);
-    //     this.isLoading = false;
-    //     this.errorMessage = errMess;
-    //     this.hasError = 'Error !!';
-    //   },
-    // });
+    let userObs: Observable<User>;
+    this.isLoading = true;
+    if (this.editMode)
+      userObs = this.usersService.updateUser(this.id, this.userForm.value);
+    else userObs = this.usersService.createUser(this.userForm.value);
+    userObs.subscribe({
+      next: (resData) => {
+        console.log('resData', resData);
+        this.isLoading = false;
+        this.router.navigate(['/users']);
+      },
+      error: (errMess) => {
+        console.log('errData', errMess);
+        this.isLoading = false;
+        this.errorMessage = errMess;
+        this.hasError = 'Error !!';
+      },
+    });
   }
   onNavigate() {
     this.router.navigate(['/users'], { relativeTo: this.route });

@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { UsersService } from './../users.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../user.model';
@@ -42,6 +42,10 @@ export class UserListComponent implements OnInit, OnDestroy {
   onChangeRecordsPerPage() {
     this.pageNumber = 1;
   }
+  onChangeStatus(user: User) {
+    console.log(user);
+    this.handleAction('changeStatus', user);
+  }
 
   onReload() {
     // console.log('reaload');
@@ -59,8 +63,19 @@ export class UserListComponent implements OnInit, OnDestroy {
     console.log(this.filter);
   }
   onDelete(id: number) {
+    this.handleAction('delete', id);
+  }
+  private handleAction(type: string, payload: any) {
     this.isLoading = true;
-    this.usersService.deleteUser(id).subscribe({
+    let obs: Observable<User>;
+
+    if (type === 'delete') {
+      obs = this.usersService.deleteUser(payload);
+    } else {
+      obs = this.usersService.changeUserStatus(payload);
+    }
+
+    obs.subscribe({
       next: (resData) => {
         this.isLoading = false;
       },

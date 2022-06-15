@@ -4,6 +4,7 @@
     [message]="errorMessage"
     *ngIf="hasError !== null"
   ></app-alert>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <h1 class="title">Login</h1>
   <form (ngSubmit)="onSubmit(f)" #f="ngForm">
     <div class="formControl">

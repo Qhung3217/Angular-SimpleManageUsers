@@ -226,5 +226,34 @@ form {
 }
 
 /***************************/
-//----------???----------//
+//----------TOGGLE CHECKBOX----------//
 /**************************/
+.toggle {
+  cursor: pointer;
+  $width: 4rem;
+  $height: 2rem;
+  .toggleInput {
+    display: none;
+    &:checked + .toggleBar {
+      background-color: $primaryColor;
+      & .toggleSpin {
+        transform: translateX($height);
+      }
+    }
+  }
+  .toggleBar {
+    width: $width;
+    height: $height;
+    border-radius: 5rem;
+    padding: 5px;
+    background-color: #eee;
+    transition: background-color 0.2s linear;
+    .toggleSpin {
+      width: calc($height - 1rem);
+      height: calc($height - 1rem);
+      border-radius: calc($height - 1rem);
+      background-color: #fff;
+      transition: transform 0.2s linear;
+    }
+  }
+}

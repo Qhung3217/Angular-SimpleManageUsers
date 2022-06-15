@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   hasError: string = null;
   errorMessage: string;
   nextURL: string = null;
+  isLoading = false;
   constructor(
     private loginService: LoginService,
     private router: Router,
@@ -27,11 +28,14 @@ export class LoginComponent implements OnInit {
   onSubmit(loginForm: NgForm) {
     const email = loginForm.value.email;
     const password = loginForm.value.password;
+    this.isLoading = true;
     if (!this.loginService.authenticate(email, password)) {
+      this.isLoading = false;
       this.hasError = 'Error !!';
       this.errorMessage = 'Email or password is incorrect';
     } else {
       // console.log(this.nextURL);
+      this.isLoading = false;
     }
   }
 }

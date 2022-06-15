@@ -4,7 +4,9 @@
     [message]="errorMessage"
     *ngIf="hasError !== null"
   ></app-alert>
-  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <app-loading-spinner
+    *ngIf="isLoading || users.length === 0"
+  ></app-loading-spinner>
   <div class="leftTools">
     <div class="dataTableLength">
       <label>
@@ -95,7 +97,7 @@
             Status
             <span class="icon">
               <svg
-                *ngIf="initialLoad || isRevert"
+                *ngIf="key !== 'status' || (isRevert && key === 'status')"
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -111,7 +113,7 @@
                 />
               </svg>
               <svg
-                *ngIf="initialLoad || !isRevert"
+                *ngIf="key !== 'status' || (!isRevert && key === 'status')"
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -134,6 +136,7 @@
             Full Name
             <span class="icon">
               <svg
+                *ngIf="key !== 'firstName' || (isRevert && key === 'firstName')"
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -149,6 +152,9 @@
                 />
               </svg>
               <svg
+                *ngIf="
+                  key !== 'firstName' || (!isRevert && key === 'firstName')
+                "
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -166,48 +172,13 @@
             </span>
           </span>
         </th>
-        <th (click)="onSort('email')">
-          <span class="thText">
-            Email
-            <span class="icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Chevron Up</title>
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="48"
-                  d="M112 328l144-144 144 144"
-                />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Chevron Down</title>
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="48"
-                  d="M112 184l144 144 144-144"
-                />
-              </svg>
-            </span>
-          </span>
-        </th>
+        <th>Email</th>
         <th (click)="onSort('phone')">
           <span class="thText">
             Phone
             <span class="icon">
               <svg
+                *ngIf="key !== 'phone' || (isRevert && key === 'phone')"
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -223,6 +194,7 @@
                 />
               </svg>
               <svg
+                *ngIf="key !== 'phone' || (!isRevert && key === 'phone')"
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -245,6 +217,7 @@
             Date of birth
             <span class="icon">
               <svg
+                *ngIf="key !== 'DOB' || (isRevert && key === 'DOB')"
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -260,6 +233,7 @@
                 />
               </svg>
               <svg
+                *ngIf="key !== 'DOB' || (!isRevert && key === 'DOB')"
                 xmlns="http://www.w3.org/2000/svg"
                 class="ionicon"
                 viewBox="0 0 512 512"
@@ -296,7 +270,24 @@
           let i = index
         "
       >
-        <td>{{ user.status ? "Activated" : "Suspended" }}</td>
+        <td>
+          <div class="statusBox">
+            <span>{{ user.status ? "Activated" : "Suspended" }}</span>
+
+            <label [for]="i" class="toggle">
+              <input
+                type="checkbox"
+                class="toggleInput"
+                [id]="i"
+                [checked]="user.status"
+                (change)="onChangeStatus(user)"
+              />
+              <div class="toggleBar">
+                <div class="toggleSpin"></div>
+              </div>
+            </label>
+          </div>
+        </td>
         <td>{{ user.firstName + " " + user.lastName }}</td>
         <td>{{ user.email | hideEmail }}</td>
         <td>{{ user.phone }}</td>
