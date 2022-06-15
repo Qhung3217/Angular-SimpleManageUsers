@@ -157,6 +157,15 @@ form {
 .formGroup {
   text-align: left;
   width: 100%;
+  position: relative;
+  .helpBlock {
+    position: absolute;
+    right: 0;
+    span {
+      font-size: 1rem;
+      color: red;
+    }
+  }
   & + & {
     margin-top: 2rem;
   }

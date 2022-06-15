@@ -38,6 +38,16 @@
         class="formControl"
         formControlName="firstName"
       />
+      <span
+        class="helpBlock"
+        *ngIf="
+          !userForm.get('firstName').valid && userForm.get('firstName').touched
+        "
+      >
+        <span *ngIf="userForm.get('firstName').errors['required']"
+          >Please enter your first name</span
+        >
+      </span>
     </div>
     <div class="formGroup">
       <label for="lastName">Last Name</label>
@@ -47,6 +57,16 @@
         class="formControl"
         formControlName="lastName"
       />
+      <span
+        class="helpBlock"
+        *ngIf="
+          !userForm.get('lastName').valid && userForm.get('lastName').touched
+        "
+      >
+        <span *ngIf="userForm.get('lastName').errors['required']"
+          >Please enter your last name</span
+        >
+      </span>
     </div>
     <div class="formGroup">
       <label for="email">Email</label>
@@ -56,6 +76,17 @@
         class="formControl"
         formControlName="email"
       />
+      <span
+        class="helpBlock"
+        *ngIf="!userForm.get('email').valid && userForm.get('email').touched"
+      >
+        <span *ngIf="userForm.get('email').errors['emailIsForbbiden']"
+          >This email is invalid</span
+        >
+        <span *ngIf="userForm.get('email').errors['required']"
+          >Please enter your email</span
+        >
+      </span>
     </div>
     <div class="formGroup">
       <label for="phone">Phone</label>
@@ -65,6 +96,14 @@
         class="formControl"
         formControlName="phone"
       />
+      <span
+        class="helpBlock"
+        *ngIf="!userForm.get('phone').valid && userForm.get('phone').touched"
+      >
+        <span *ngIf="userForm.get('phone').errors['required']"
+          >Please enter your phone</span
+        >
+      </span>
     </div>
 
     <div class="formGroup">
@@ -119,8 +158,7 @@
       <aside>Accept only Facebook, Twitter and LinkedIn</aside>
       <div
         class="socialLink"
-        *ngFor="let ingredient of getControls('socialLinks'); let i = index"
-        [formGroupName]="i"
+        *ngFor="let socialLink of getControls('socialLinks'); let i = index"
       >
         <div class="linkArea">
           <div class="formGroup">
@@ -129,14 +167,25 @@
               id="link"
               type="text"
               class="formControl"
-              formControlName="address"
+              [formControlName]="i"
             />
-          </div>
-          <div
-            *ngIf="userForm.errors?.['socialLinksValid'] && (heroForm.touched || heroForm.dirty)"
-            class="cross-validation-error-message alert alert-danger"
-          >
-            Social link invalid !
+            <span
+              *ngIf="
+                !getControls('socialLinks')[i].valid &&
+                getControls('socialLinks')[i].touched
+              "
+              class="helpBlock"
+            >
+              <span
+                *ngIf="
+                  getControls('socialLinks')[i]?.errors['socialLinksValid']
+                "
+                >Social link is invalid !</span
+              >
+              <span *ngIf="getControls('socialLinks')[i]?.errors['required']"
+                >Please enter your social link</span
+              >
+            </span>
           </div>
         </div>
         <div class="deleteSocialLink">
@@ -161,7 +210,7 @@
         class="btn btn-success"
         [disabled]="!userForm.valid"
       >
-        Save
+        Create
       </button>
     </div>
   </form>

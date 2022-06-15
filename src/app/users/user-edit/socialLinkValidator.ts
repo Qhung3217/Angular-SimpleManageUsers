@@ -1,40 +1,25 @@
-import { AbstractControl, ValidationErrors, FormArray } from '@angular/forms';
-
+import { FormControl } from '@angular/forms';
+import * as RegEx from '../../shared/regex';
 export function SocialLinkValidator(
-  control: AbstractControl
-): ValidationErrors | null {
-  const socialLinks = control.get('socialLinks');
-  console.log(!socialLinks, socialLinks, control);
+  control: FormControl
+): { [s: string]: boolean } | null {
+  if (!control.value) return null;
+  const value: string = control.value;
+  console.log(
+    RegEx.facebook.test(value),
+    RegEx.twitter.test(value),
+    RegEx.linkedin.test(value)
+  );
+  if (RegEx.facebook.test(value)) {
+    console.log('fb');
+    return null;
+  } else if (RegEx.twitter.test(value)) {
+    console.log('tw');
+    return null;
+  } else if (RegEx.linkedin.test(value)) {
+    console.log('ln');
+    return null;
+  }
 
-  if (!socialLinks) return null;
-
-  const socialLinksControls = (<FormArray>socialLinks).controls;
-
-  socialLinksControls.forEach((control) => {
-    const social = control.get('social');
-    const address = control.get('address');
-    console.log('social-address: ', social, address);
-    if (address.value === null) return null;
-    switch (social.value) {
-      case 'facebook':
-        return address.value.match(
-          /^(http(s)?:\/\/)?((w{3}\.)?)facebook.com(\/.+)?$/
-        )
-          ? { socialLinksValid: true }
-          : null;
-
-      case 'twitter':
-        return address.value.match(
-          /^(http(s)?:\/\/)?((w{3}\.)?)twitter\.com\/(#!\/)?[a-z0-9_]+$/
-        )
-          ? { socialLinksValid: true }
-          : null;
-      case 'linkedin':
-        return address.value.match(
-          /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)(\/\w+)?$/
-        )
-          ? { socialLinksValid: true }
-          : null;
-    }
-  });
+  return { socialLinksValid: true };
 }

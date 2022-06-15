@@ -54,7 +54,10 @@ export class UserEditComponent implements OnInit {
         for (let link of this.user.socialLinks) {
           userSocialLinks.push(
             new FormGroup({
-              address: new FormControl(link.address),
+              address: new FormControl(link.address, [
+                Validators.required,
+                SocialLinkValidator,
+              ]),
             })
           );
         }
@@ -80,10 +83,9 @@ export class UserEditComponent implements OnInit {
 
   onAddSocialLink() {
     (<FormArray>this.userForm.get('socialLinks')).push(
-      new FormGroup({
-        address: new FormControl(null),
-      })
+      new FormControl(null, [Validators.required, SocialLinkValidator])
     );
+    console.log(this.userForm.get('socialLinks'));
   }
   getControls(name: string) {
     return (<FormArray>this.userForm.get(name)).controls;
