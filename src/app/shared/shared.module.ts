@@ -1,19 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { HideEmailPipe } from './hide-email.pipe';
-import { FilterPipe } from './filter.pipe';
-import { CountPipe } from './count.pipe';
-import { TriggerClickOnChangeDirective } from './directives/trigger-click-on-change.directive';
+import { HideEmailPipe } from './pipes/hide-email.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { CountPipe } from './pipes/count.pipe';
 import { DropDownDirectiveDirective } from './directives/drop-down-directive.directive';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { NgModule } from '@angular/core';
-import { FilterStatusPipe } from './filter-status.pipe';
+import { FilterStatusPipe } from './pipes/filter-status.pipe';
 import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
     LoadingSpinnerComponent,
     DropDownDirectiveDirective,
-    TriggerClickOnChangeDirective,
     CountPipe,
     FilterPipe,
     FilterStatusPipe,
@@ -24,7 +22,6 @@ import { AlertComponent } from './alert/alert.component';
   exports: [
     LoadingSpinnerComponent,
     DropDownDirectiveDirective,
-    TriggerClickOnChangeDirective,
     CountPipe,
     FilterPipe,
     FilterStatusPipe,

@@ -1,4 +1,3 @@
-import { User } from './../users/user.model';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

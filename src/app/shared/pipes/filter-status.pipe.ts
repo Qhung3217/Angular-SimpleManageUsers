@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { User } from '../users/user.model';
+import { User } from '../../users/user.model';
 
 @Pipe({
   name: 'filterStatus',
