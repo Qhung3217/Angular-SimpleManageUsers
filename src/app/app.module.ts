@@ -20,6 +20,8 @@ import { FilterStatusPipe } from './shared/filter-status.pipe';
 import { FilterPipe } from './shared/filter.pipe';
 import { CountPipe } from './shared/count.pipe';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { DropDownDirectiveDirective } from './shared/directives/drop-down-directive.directive';
+import { TriggerClickOnChangeDirective } from './shared/directives/trigger-click-on-change.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     FilterPipe,
     CountPipe,
     LoadingSpinnerComponent,
+    DropDownDirectiveDirective,
+    TriggerClickOnChangeDirective,
   ],
   imports: [
     FormsModule,

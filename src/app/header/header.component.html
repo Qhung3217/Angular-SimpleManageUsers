@@ -1,8 +1,8 @@
-<header class="header">
+<header class="header" [class.open]="isOpenMobileMenu">
   <div class="wide">
     <h3 class="logo">Admin</h3>
     <nav class="navBar">
-      <ul class="navBarList">
+      <ul class="navBarList" (click)="toggleMenu()">
         <li class="navBarItem">
           <a routerLink="/users" routerLinkActive="active">Users</a>
         </li>
@@ -22,5 +22,38 @@
         </li>
       </ul>
     </nav>
+    <button class="btnMobileNav" (click)="toggleMenu()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="iconClose"
+        viewBox="0 0 512 512"
+      >
+        <title>Menu</title>
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-miterlimit="10"
+          stroke-width="32"
+          d="M80 160h352M80 256h352M80 352h352"
+        />
+      </svg>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="iconOpen"
+        viewBox="0 0 512 512"
+      >
+        <title>Close</title>
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="32"
+          d="M368 368L144 144M368 144L144 368"
+        />
+      </svg>
+    </button>
   </div>
 </header>

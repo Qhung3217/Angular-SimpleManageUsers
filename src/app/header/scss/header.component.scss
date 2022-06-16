@@ -1,4 +1,4 @@
-@import "../../scss/variable";
+@import "../../../scss/variable";
 
 .header {
   width: 100%;
@@ -37,3 +37,7 @@
   color: inherit;
   padding: 0.8rem 1.4rem;
 }
+.btnMobileNav {
+  display: none;
+}
+@import "./header-responsive";

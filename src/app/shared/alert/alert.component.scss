@@ -1,3 +1,4 @@
+@import "../../../scss/mixin";
 .overlay {
   position: absolute;
   top: 0;
@@ -15,6 +16,7 @@
     background-color: white;
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+
     .title {
       font-size: 3.4rem;
       line-height: 1;
@@ -30,4 +32,15 @@
 
 .hide {
   display: none;
+}
+@include maxWidth(34.5em) {
+  .overlay {
+    .model {
+      max-width: 30rem;
+      padding: 2rem 3rem;
+      .btn {
+        padding: 1.2rem 3.6rem;
+      }
+    }
+  }
 }

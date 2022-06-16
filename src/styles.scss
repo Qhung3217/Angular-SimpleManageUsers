@@ -1,18 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-@import "./scss/grid-system.scss";
+// @import "./scss/grid-system.scss";
 @import "./scss/variable";
-
+@import "./scss/mixin";
+*,
 *:before,
 *:after {
   box-sizing: border-box;
 }
 * {
   font-family: $fontFamily;
+  margin: 0;
+  padding: 0;
 }
 html {
   font-size: 62.5%;
 }
-
+@include maxWidth(34.5em) {
+  html {
+    font-size: 50%;
+  }
+}
+.wide {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
 /***************************/
 //----------BUTTON----------//
 /**************************/

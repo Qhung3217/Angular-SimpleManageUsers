@@ -1,11 +1,16 @@
+@import "../../../../scss/variable";
 table {
   width: 100%;
+  min-width: 90rem;
   border-collapse: separate;
   border: 1px solid #f4f4f4;
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.06);
+  thead {
+    font-size: 1.4rem;
+  }
   thead th {
     border-bottom: 3px solid #f9f9f9;
-    font-size: 1.4rem;
+    // font-size: 1.4rem;
     width: 20%;
     text-align: left;
     padding: 1.2rem 2.4rem;
@@ -37,10 +42,12 @@ table {
   th:last-child {
     border-right: none;
   }
-
+  tbody {
+    font-size: 1.4rem;
+  }
   tbody td {
     padding: 0.8rem;
-    font-size: 1.4rem;
+    // font-size: 1.4rem;
     color: #333;
   }
   tbody tr:nth-child(even) {
@@ -52,7 +59,7 @@ table {
     a {
       letter-spacing: -0.2px;
       padding: 0.5rem 1rem;
-      font-size: 1.4rem;
+      font-size: inherit;
     }
     a + a {
       margin-left: 1rem;
@@ -66,12 +73,13 @@ table {
   margin-bottom: 1rem;
   margin-top: 5rem;
   color: #333;
+  font-size: 1.6rem;
   .searchBox {
     display: flex;
     justify-content: center;
     align-items: center;
     span {
-      font-size: 1.6rem;
+      // font-size: 1.6rem;
       margin-right: 0.5rem;
     }
     .searchInput {
@@ -90,19 +98,9 @@ table {
         box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
       }
     }
-    // .searchIcon {
-    //   width: 2.4rem;
-    //   height: 2.4rem;
-    //   flex-shrink: 0;
-    //   margin-left: 0.8rem;
-    //   svg {
-    //     width: 100%;
-    //     height: 100%;
-    //     cursor: pointer;
-    //   }
-    // }
   }
-  .leftTools {
+  .leftTools,
+  .leftToolsMobile {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -111,13 +109,13 @@ table {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.6rem;
+      // font-size: 1.6rem;
       select {
         margin: 0 0.5rem;
       }
     }
     .reloadBox {
-      font-size: 1.6rem;
+      // font-size: 1.6rem;
       line-height: 1;
       cursor: pointer;
       display: flex;
@@ -140,7 +138,7 @@ table {
         padding: 0.2rem 0.8rem;
         text-decoration: none;
         color: #333;
-        font-size: 1.6rem;
+        // font-size: 1.6rem;
         font-weight: 500;
         display: flex;
         justify-content: center;
@@ -161,7 +159,7 @@ table {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.6rem;
+      // font-size: 1.6rem;
       margin-right: 0.5rem;
       display: flex;
       justify-content: center;
@@ -182,25 +180,38 @@ table {
   margin-top: 3rem;
   .statusBox {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-  .tableBottom {
-    display: flex;
     justify-content: space-between;
     align-items: center;
-    .tableInfor {
-      font-size: 1.4rem;
-    }
-    .paginateBox {
-      margin-top: 1rem;
-      .paginate {
-        font-size: 1.8rem;
-        & ::ng-deep .ngx-pagination {
-          border: 1px solid #f9f9f9;
-          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+  }
+}
+.tableBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .tableInfor {
+    font-size: 1.4rem;
+  }
+  .paginateBox {
+    margin-top: 1rem;
+    .paginate {
+      font-size: 1.8rem;
+      & ::ng-deep .ngx-pagination {
+        border: 1px solid #f9f9f9;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        display: flex;
+        gap: 1.2rem;
+        & .current {
+          background-color: $primaryColor;
+          border-radius: 4px;
         }
       }
     }
   }
 }
+
+.sectionHeader {
+  .leftToolsMobile {
+    display: none;
+  }
+}
+@import "./user-list-responsive";

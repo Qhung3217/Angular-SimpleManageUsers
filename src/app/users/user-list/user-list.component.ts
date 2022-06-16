@@ -6,7 +6,7 @@ import { User } from '../user.model';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.scss'],
+  styleUrls: ['./scss/user-list.component.scss'],
 })
 export class UserListComponent implements OnInit, OnDestroy {
   users: User[];
@@ -58,6 +58,10 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.key = key;
     this.isRevert = !this.isRevert;
     this.initialLoad = false;
+  }
+  onClickSelect(event) {
+    console.log(event);
+    if (event.button !== -1) event.stopPropagation();
   }
   onFilter() {
     console.log(this.filter);

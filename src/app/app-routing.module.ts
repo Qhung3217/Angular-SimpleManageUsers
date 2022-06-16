@@ -8,7 +8,7 @@ import { UserResolverService } from './users/user-resolver.service';
 import { UserListComponent } from './users/user-list/user-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: '/users', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
     path: 'users',

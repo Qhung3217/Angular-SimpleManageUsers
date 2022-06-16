@@ -7,6 +7,131 @@
   <app-loading-spinner
     *ngIf="isLoading || users.length === 0"
   ></app-loading-spinner>
+  <div class="leftToolsMobile" appDropDownDirective>
+    <div class="icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="ionicon"
+        viewBox="0 0 512 512"
+      >
+        <title>Options</title>
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="32"
+          d="M368 128h80M64 128h240M368 384h80M64 384h240M208 256h240M64 256h80"
+        />
+        <circle
+          cx="336"
+          cy="128"
+          r="32"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="32"
+        />
+        <circle
+          cx="176"
+          cy="256"
+          r="32"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="32"
+        />
+        <circle
+          cx="336"
+          cy="384"
+          r="32"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="32"
+        />
+      </svg>
+    </div>
+    <div class="toolsPopup">
+      <div class="dataTableLength">
+        <label>
+          Show
+          <select
+            name="tableLength"
+            [(ngModel)]="recordsPerPage"
+            (change)="onChangeRecordsPerPage()"
+            (click)="onClickSelect($event)"
+          >
+            <option [value]="choice" *ngFor="let choice of paginateChoices">
+              {{ choice }}
+            </option>
+          </select>
+          entries
+        </label>
+      </div>
+      <div class="reloadBox" (click)="onReload()">
+        Reload
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="ionicon"
+            viewBox="0 0 512 512"
+          >
+            <title>Reload</title>
+            <path
+              d="M400 148l-21.12-24.57A191.43 191.43 0 00240 64C134 64 48 150 48 256s86 192 192 192a192.09 192.09 0 00181.07-128"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-miterlimit="10"
+              stroke-width="32"
+            />
+            <path
+              d="M464 97.42V208a16 16 0 01-16 16H337.42c-14.26 0-21.4-17.23-11.32-27.31L436.69 86.1C446.77 76 464 83.16 464 97.42z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div class="createUser">
+        <a routerLink="new">New User <span>+</span></a>
+      </div>
+      <div class="filter">
+        <p>
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="ionicon"
+              viewBox="0 0 512 512"
+            >
+              <title>Filter</title>
+              <path
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="32"
+                d="M32 144h448M112 256h288M208 368h96"
+              />
+            </svg>
+          </span>
+          Status:
+        </p>
+        <select
+          name="filerSelect"
+          [(ngModel)]="filter"
+          (change)="onFilter()"
+          (click)="onClickSelect($event)"
+        >
+          <option value="all">All</option>
+          <option value="activated">Activated</option>
+          <option value="suspended">Suspended</option>
+        </select>
+      </div>
+    </div>
+  </div>
   <div class="leftTools">
     <div class="dataTableLength">
       <label>
@@ -301,17 +426,17 @@
       </tr>
     </tbody>
   </table>
-  <div class="tableBottom">
-    <div class="tableInfor">
-      Showing 1 to {{ recordsPerPage }} of {{ filterMetadata.count }} entries
-    </div>
-    <div class="paginateBox">
-      <pagination-controls
-        class="paginate"
-        (pageChange)="pageNumber = $event"
-        directionLinks="false"
-        (pageBoundsCorrection)="pageNumber = $event"
-      ></pagination-controls>
-    </div>
+</div>
+<div class="tableBottom">
+  <div class="tableInfor">
+    Showing 1 to {{ recordsPerPage }} of {{ filterMetadata.count }} entries
+  </div>
+  <div class="paginateBox">
+    <pagination-controls
+      class="paginate"
+      (pageChange)="pageNumber = $event"
+      directionLinks="false"
+      (pageBoundsCorrection)="pageNumber = $event"
+    ></pagination-controls>
   </div>
 </div>
