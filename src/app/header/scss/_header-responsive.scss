@@ -10,8 +10,8 @@
 @include maxWidth(34.5em) {
   .btnMobileNav {
     display: block;
-    width: 3rem;
-    height: 3rem;
+    width: 5rem;
+    height: 5rem;
     position: relative;
 
     z-index: 3;
@@ -23,6 +23,8 @@
     }
     .iconOpen {
       display: none;
+      width: 5rem;
+      height: 5rem;
     }
   }
   .header {

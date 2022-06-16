@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   paginateChoices = [5, 10, 15, 20];
   recordsPerPage = this.paginateChoices[1];
   pageNumber = 1;
-  initialLoad = true;
+  initialSort: number = 0;
   filter = 'all';
   filterMetadata = {
     count: 0,
@@ -53,11 +53,17 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.usersService.fetchUsers().subscribe(() => {
       this.isLoading = false;
     });
+    this.key = null;
   }
   onSort(key: string) {
     this.key = key;
     this.isRevert = !this.isRevert;
-    this.initialLoad = false;
+    this.initialSort++;
+    if (this.initialSort === 3) {
+      this.key = null;
+      this.isRevert = false;
+      this.initialSort = 0;
+    }
   }
   onClickSelect(event) {
     console.log(event);

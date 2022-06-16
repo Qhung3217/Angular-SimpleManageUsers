@@ -7,7 +7,7 @@ export class HideEmailPipe implements PipeTransform {
   transform(value: string): string {
     let email = value;
     const numberCharHideBefore = value.indexOf('@') - 2;
-    const numberCharHideAfter = value.lastIndexOf('.') - value.indexOf('@') - 1;
+    const numberCharHideAfter = value.lastIndexOf('.') - value.indexOf('@') - 2; // -1 for show 1 char and -1 for except '.'
     let stringReplaceBefore = this.addPartials(numberCharHideBefore);
     let stringReplaceAfter = this.addPartials(numberCharHideAfter);
 

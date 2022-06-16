@@ -1,41 +1,29 @@
 import { AuthGuard } from './login/auth.guard';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserResolverService } from './users/user-resolver.service';
 import { UserListComponent } from './users/user-list/user-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/users', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'users', pathMatch: 'full' },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginModule),
+  },
   {
     path: 'users',
-    component: UsersComponent,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: '',
-        component: UserListComponent,
-        resolve: [UserResolverService],
-      },
-      {
-        path: 'new',
-        component: UserEditComponent,
-        resolve: [UserResolverService],
-      },
-      {
-        path: ':id/edit',
-        component: UserEditComponent,
-        resolve: [UserResolverService],
-      },
-    ],
+    loadChildren: () =>
+      import('./users/users.module').then((m) => m.UsersModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

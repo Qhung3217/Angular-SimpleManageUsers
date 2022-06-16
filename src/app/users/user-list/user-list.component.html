@@ -1,12 +1,12 @@
+<app-alert
+  [title]="hasError"
+  [message]="errorMessage"
+  *ngIf="hasError !== null"
+></app-alert>
+<app-loading-spinner
+  *ngIf="isLoading || users.length === 0"
+></app-loading-spinner>
 <div class="sectionHeader">
-  <app-alert
-    [title]="hasError"
-    [message]="errorMessage"
-    *ngIf="hasError !== null"
-  ></app-alert>
-  <app-loading-spinner
-    *ngIf="isLoading || users.length === 0"
-  ></app-loading-spinner>
   <div class="leftToolsMobile" appDropDownDirective>
     <div class="icon">
       <svg
@@ -297,7 +297,45 @@
             </span>
           </span>
         </th>
-        <th>Email</th>
+        <th (click)="onSort('email')">
+          <span class="thText">
+            Email
+            <span class="icon">
+              <svg
+                *ngIf="key !== 'email' || (isRevert && key === 'email')"
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Up</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 328l144-144 144 144"
+                />
+              </svg>
+              <svg
+                *ngIf="key !== 'email' || (!isRevert && key === 'email')"
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Chevron Down</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M112 184l144 144 144-144"
+                />
+              </svg>
+            </span>
+          </span>
+        </th>
         <th (click)="onSort('phone')">
           <span class="thText">
             Phone
@@ -337,45 +375,7 @@
             </span>
           </span>
         </th>
-        <th (click)="onSort('DOB')">
-          <span class="thText">
-            Date of birth
-            <span class="icon">
-              <svg
-                *ngIf="key !== 'DOB' || (isRevert && key === 'DOB')"
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Chevron Up</title>
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="48"
-                  d="M112 328l144-144 144 144"
-                />
-              </svg>
-              <svg
-                *ngIf="key !== 'DOB' || (!isRevert && key === 'DOB')"
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Chevron Down</title>
-                <path
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="48"
-                  d="M112 184l144 144 144-144"
-                />
-              </svg>
-            </span>
-          </span>
-        </th>
+        <th>Date of birth</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -416,7 +416,7 @@
         <td>{{ user.firstName + " " + user.lastName }}</td>
         <td>{{ user.email | hideEmail }}</td>
         <td>{{ user.phone }}</td>
-        <td>{{ user.DOB | date: mediumDate }}</td>
+        <td>{{ user.DOB | date: "yyyy-dd-MM" }}</td>
         <td>
           <div class="actionBox">
             <a [routerLink]="[user.id, 'edit']" class="btn btn-success">Edit</a>

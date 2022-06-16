@@ -55,7 +55,7 @@ export class LoginService {
     const expirationDuration =
       new Date(credential.expiresIn).getTime() - new Date().getTime();
     this.autoLogout(expirationDuration);
-    this.router.navigate(['/users']);
+    // this.router.navigate(['/users']);
   }
 
   autoLogout(expirationDuration: number) {

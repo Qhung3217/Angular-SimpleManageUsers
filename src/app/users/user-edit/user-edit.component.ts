@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SocialLinkValidator } from './socialLinkValidator';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-edit',
@@ -20,6 +21,7 @@ export class UserEditComponent implements OnInit {
   hasError: string = null;
   errorMessage = null;
   isLoading: boolean = false;
+  datePipe: DatePipe = new DatePipe('en-EN');
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -41,7 +43,7 @@ export class UserEditComponent implements OnInit {
     let userLastName = '';
     let userEmail = '';
     let userPhone = '';
-    let userDOB: Date;
+    let userDOB: string;
     let userStatus: boolean = true;
     let userSocialLinks = new FormArray([]);
 
@@ -52,7 +54,9 @@ export class UserEditComponent implements OnInit {
       userLastName = this.user.lastName;
       userEmail = this.user.email;
       userPhone = this.user.phone;
-      userDOB = new Date(this.user.DOB);
+      const dateDOB = new Date(this.user.DOB);
+      userDOB = this.datePipe.transform(dateDOB, 'yyyy-MM-dd');
+      // console.log(userDOB);
       userStatus = this.user.status;
       if (this.user.socialLinks) {
         for (let link of this.user.socialLinks) {

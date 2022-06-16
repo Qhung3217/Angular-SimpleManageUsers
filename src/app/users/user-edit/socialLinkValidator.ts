@@ -3,7 +3,7 @@ import * as RegEx from '../../shared/regex';
 export function SocialLinkValidator(
   control: FormControl
 ): { [s: string]: boolean } | null {
-  console.log("'", control.value, control['socialLinks'], "'");
+  // console.log("'", control.value, control['socialLinks'], "'");
   if (!control['socialLinks']?.length && !control.value) return null;
   const value: string = control.value;
   if (typeof value === 'object') return null; //if control has value, typeof control = string. Otherwise is object
