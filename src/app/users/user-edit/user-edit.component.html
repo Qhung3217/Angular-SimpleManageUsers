@@ -1,9 +1,9 @@
+<app-alert
+  [title]="hasError"
+  [message]="errorMessage"
+  *ngIf="hasError !== null"
+></app-alert>
 <div class="formWrap">
-  <app-alert
-    [title]="hasError"
-    [message]="errorMessage"
-    *ngIf="hasError !== null"
-  ></app-alert>
   <div class="formHeading">
     <a (click)="onNavigate()" class="formBack"
       ><span>
@@ -31,7 +31,9 @@
           /></svg></span
       >Back to Users</a
     >
-    <h1 class="formTitle">Create a new user</h1>
+    <h1 class="formTitle">
+      {{ editMode ? "Update user" : "Create new user" }}
+    </h1>
   </div>
 
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">

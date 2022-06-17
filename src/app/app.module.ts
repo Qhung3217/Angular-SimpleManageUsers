@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
 import { UsersModule } from './users/users.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, PageNotFoundComponent],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],

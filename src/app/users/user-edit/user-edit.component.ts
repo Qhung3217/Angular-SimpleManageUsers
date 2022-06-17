@@ -33,8 +33,14 @@ export class UserEditComponent implements OnInit {
       this.id = +params['id'];
       this.editMode = params['id'] != null;
       this.user = this.usersService.getUser(this.id);
-      this.initForm();
       console.log('user: ', this.user);
+
+      if (!this.user && this.editMode === true) {
+        this.hasError = 'Error !!';
+        this.errorMessage = 'User id not found';
+        this.editMode = false;
+      }
+      this.initForm();
     });
   }
 

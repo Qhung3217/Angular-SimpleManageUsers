@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Email or password is incorrect';
     } else {
       // console.log(this.nextURL);
-      this.isLoading = false;
+      // this.isLoading = false;
     }
   }
 }

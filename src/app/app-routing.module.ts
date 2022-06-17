@@ -5,6 +5,7 @@ import { UsersComponent } from './users/users.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserResolverService } from './users/user-resolver.service';
 import { UserListComponent } from './users/user-list/user-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'users', pathMatch: 'full' },
@@ -18,6 +19,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),
   },
+  { path: '**', redirectTo: '/page-not-found' },
+  { path: 'page-not-found', component: PageNotFoundComponent },
 ];
 
 @NgModule({
